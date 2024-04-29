@@ -1,1 +1,4 @@
 *.pyc
+.micropico
+.vscode/
+*.code-workspace

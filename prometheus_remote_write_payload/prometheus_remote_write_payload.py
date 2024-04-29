@@ -7,9 +7,9 @@ def int_to_varint(v: int) -> bytes:
         t = v & 0b0111_1111
         v >>= 7
         if v == 0 or (v == -1 and t & 0b0100_0000 > 0):
-            b += t.to_bytes(1, byteorder="little")
+            b += t.to_bytes(1, "little")
             break
-        b += (t | 0b1000_0000).to_bytes(1, byteorder="little")
+        b += (t | 0b1000_0000).to_bytes(1, "little")
     return b
 
 
@@ -17,7 +17,7 @@ def no_compress_snappy(data: bytes):
     snappy = int_to_varint(len(data))
     for chunk in [data[i : i + 60] for i in range(0, len(data), 60)]:
         chunk_len = len(chunk)
-        snappy += ((chunk_len - 1) << 2).to_bytes(1, byteorder="little")
+        snappy += ((chunk_len - 1) << 2).to_bytes(1, "little")
         snappy += chunk
     return snappy
 
@@ -71,19 +71,19 @@ class PrometheusRemoteWritePayload:
         for timeseries in self.timeseries:
             timeseries_data = b""
             for label in timeseries.labels:
-                label_data = (1 << 3 | 2).to_bytes(1, byteorder="little")
-                label_data += data_with_length(label.name.encode(encoding="utf-8"))
-                label_data += (2 << 3 | 2).to_bytes(1, byteorder="little")
-                label_data += data_with_length(label.value.encode(encoding="utf-8"))
-                timeseries_data += (1 << 3 | 2).to_bytes(1, byteorder="little")
+                label_data = (1 << 3 | 2).to_bytes(1, "little")
+                label_data += data_with_length(label.name.encode("utf-8"))
+                label_data += (2 << 3 | 2).to_bytes(1, "little")
+                label_data += data_with_length(label.value.encode("utf-8"))
+                timeseries_data += (1 << 3 | 2).to_bytes(1, "little")
                 timeseries_data += data_with_length(label_data)
             for sample in timeseries.samples:
-                sample_data = (1 << 3 | 1).to_bytes(1, byteorder="little")
+                sample_data = (1 << 3 | 1).to_bytes(1, "little")
                 sample_data += struct.pack("<d", sample.value)
-                sample_data += (2 << 3 | 0).to_bytes(1, byteorder="little")
+                sample_data += (2 << 3 | 0).to_bytes(1, "little")
                 sample_data += int_to_varint(sample.timestamp)
-                timeseries_data += (2 << 3 | 2).to_bytes(1, byteorder="little")
+                timeseries_data += (2 << 3 | 2).to_bytes(1, "little")
                 timeseries_data += data_with_length(sample_data)
-            payload += (1 << 3 | 2).to_bytes(1, byteorder="little")
+            payload += (1 << 3 | 2).to_bytes(1, "little")
             payload += data_with_length(timeseries_data)
         return no_compress_snappy(payload)
