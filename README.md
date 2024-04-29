@@ -58,10 +58,10 @@ prometheus.add_data(
 )
 
 prometheus_remote_write_endpoint = "https://prometheus-remote-write-endpoint"
-prometheus_remote_write_endpoint_basic_auth = "MD5 hash of user:password"
+prometheus_remote_write_endpoint_basic_auth = ("user", "password")
 urequests.post(
     prometheus_remote_write_endpoint,
-    headers={"Authorization": f"Basic {prometheus_remote_write_endpoint_basic_auth}"},
     data=prometheus.get_payload(),
+    auth=prometheus_remote_write_endpoint_basic_auth,
 )
 ```
