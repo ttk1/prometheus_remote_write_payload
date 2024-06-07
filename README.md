@@ -6,10 +6,19 @@ This utility generates payloads for [Prometheus remote-write](https://prometheus
 
 * Python 3 or MicroPython
 
-## Installation (Python 3)
+## Installation
+
+### Python 3
 
 ```sh
 pip install git+https://github.com/ttk1/prometheus_remote_write_payload.git
+```
+
+### MicroPython (mip)
+
+```py
+import mip
+mip.install("github:ttk1/prometheus_remote_write_payload")
 ```
 
 ## Example Usage

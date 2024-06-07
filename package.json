@@ -1,0 +1,13 @@
+{
+    "urls": [
+        [
+            "prometheus_remote_write_payload/__init__.py",
+            "github:ttk1/prometheus_remote_write_payload/prometheus_remote_write_payload/__init__.py"
+        ],
+        [
+            "prometheus_remote_write_payload/prometheus_remote_write_payload.py",
+            "github:ttk1/prometheus_remote_write_payload/prometheus_remote_write_payload/prometheus_remote_write_payload.py"
+        ]
+    ],
+    "version": "1.0.0"
+}
