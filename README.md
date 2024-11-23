@@ -1,6 +1,6 @@
 # Prometheus Remote-Write Payload Generator
 
-This utility generates payloads for [Prometheus remote-write](https://prometheus.io/docs/concepts/remote_write_spec/), compatible with Python 3 and MicroPython environments.
+This utility generates payloads for [Prometheus remote-write v1.0](https://prometheus.io/docs/concepts/remote_write_spec/), compatible with Python 3 and MicroPython environments.
 
 ## Requirements
 
