@@ -60,8 +60,9 @@ class PrometheusRemoteWritePayload:
 
     def add_data(self, name: str, labels: dict[str, str], data: float, timestamp: int):
         timeseries = TimeSeries()
-        timeseries.add_label(Label("__name__", name))
-        for key in labels:
+        labels["__name__"] = name
+        for key in sorted(labels.keys()):
+            # TODO: ラベル名と値のチェック
             timeseries.add_label(Label(key, labels[key]))
         timeseries.add_sample(Sample(data, timestamp))
         self.add_timeseries(timeseries)
