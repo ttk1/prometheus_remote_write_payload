@@ -14,6 +14,12 @@ This utility generates payloads for [Prometheus remote-write v1.0](https://prome
 pip install git+https://github.com/ttk1/prometheus_remote_write_payload.git
 ```
 
+### MicroPython (mpremote)
+
+```sh
+mpremote mip install github:ttk1/prometheus_remote_write_payload
+```
+
 ### MicroPython (mip)
 
 ```py
