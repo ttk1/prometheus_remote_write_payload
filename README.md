@@ -34,6 +34,7 @@ mip.install("github:ttk1/prometheus_remote_write_payload")
 ```py
 import sys
 import time
+
 from prometheus_remote_write_payload import PrometheusRemoteWritePayload
 
 prometheus = PrometheusRemoteWritePayload()
@@ -47,17 +48,17 @@ sys.stdout.buffer.write(prometheus.get_payload())
 python example.py | curl -u "${user}:${password}" \
   -H 'Content-Encoding:snappy' \
   -H 'Content-Type:application/x-protobuf' \
-  -H 'X-Prometheus-Remote-Write-Version:1.0.0' \
+  -H 'X-Prometheus-Remote-Write-Version:0.1.0' \
   --data-binary @- https://${prometheus-remote-write-endpoint}
 ```
 
 ### MicroPython
 
 ```py
-import utime
 import network
-import urequests
 import ntptime
+import urequests
+import utime
 
 from prometheus_remote_write_payload import PrometheusRemoteWritePayload
 
@@ -75,7 +76,7 @@ headers = {
     "Content-Encoding": "snappy",
     "Content-Type": "application/x-protobuf",
     "User-Agent": "MicroPython",
-    "X-Prometheus-Remote-Write-Version": "1.0.0"
+    "X-Prometheus-Remote-Write-Version": "0.1.0",
 }
 
 prometheus = PrometheusRemoteWritePayload()
